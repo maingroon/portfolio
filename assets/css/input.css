@@ -1,6 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Define custom theme using Tailwind v4 @theme directive */
+@theme {
+  --color-bg: #0d1b2a;
+  --color-panel: #1b263b;
+  --color-text: #e0e1dd;
+  --color-muted: rgba(224, 225, 221, 0.78);
+  --color-line: rgba(224, 225, 221, 0.35);
+  
+  --font-family-sans: 'Roboto', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  
+  --spacing-header-h: 75px;
+  
+  --shadow-custom: 0 0 15px rgba(0, 0, 0, 0.10);
+  --shadow-card-hover: 0 10px 26px rgba(0, 0, 0, 0.22);
+}
 
 /* Local Roboto Fonts */
 @font-face {
@@ -35,7 +49,9 @@
   }
   
   body {
-    @apply bg-bg text-text font-sans antialiased;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-family-sans);
     margin: 0;
     height: 100%;
     -webkit-font-smoothing: antialiased;
@@ -47,10 +63,37 @@
   }
 }
 
+/* Custom utility classes for theme colors */
+@layer utilities {
+  .bg-bg {
+    background-color: var(--color-bg);
+  }
+  .bg-panel {
+    background-color: var(--color-panel);
+  }
+  .text-text {
+    color: var(--color-text);
+  }
+  .text-muted {
+    color: var(--color-muted);
+  }
+  .bg-line {
+    background-color: var(--color-line);
+  }
+  .border-text {
+    border-color: var(--color-text);
+  }
+}
+
 /* Custom components */
 @layer components {
   .container {
-    @apply w-full max-w-[762px] mx-auto px-6;
+    width: 100% !important;
+    max-width: 762px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
   
   .blog-posts-grid {

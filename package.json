@@ -1,7 +1,7 @@
 {
   "name": "portfolio-website",
   "version": "1.0.0",
-  "description": "Personal portfolio website for Java developer with blog",
+  "description": "Personal portfolio website with blog",
   "main": "build.js",
   "scripts": {
     "build": "npm run build:css && node build.js",
@@ -12,9 +12,9 @@
   "keywords": [
     "portfolio",
     "blog",
-    "java-developer"
+    "backend-developer"
   ],
-  "author": "",
+  "author": "Oleksandr Borovyk",
   "license": "MIT",
   "dependencies": {
     "front-matter": "^4.0.2",
