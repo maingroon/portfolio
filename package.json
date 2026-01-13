@@ -5,9 +5,9 @@
   "main": "build.js",
   "scripts": {
     "build": "npm run build:css && node build.js",
-    "build:css": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css --minify",
+    "build:css": "npx postcss ./assets/css/input.css -o ./assets/css/main.css --minify",
     "dev": "node build.js --watch",
-    "dev:css": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css --watch"
+    "dev:css": "npx postcss ./assets/css/input.css -o ./assets/css/main.css --watch"
   },
   "keywords": [
     "portfolio",
@@ -24,6 +24,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.23",
     "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
     "tailwindcss": "^4.1.18"
   }
 }
