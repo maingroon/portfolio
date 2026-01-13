@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "spring-with-hibernate",
+    "title": "How to Use Hibernate with PostgreSQL and Spring Boot",
+    "date": "2026-01-13T00:00:00.000Z",
+    "tags": [
+      "java",
+      "spring-boot",
+      "hibernate",
+      "postgresql",
+      "jpa",
+      "database"
+    ],
+    "excerpt": "Learn how to configure and use Hibernate ORM with PostgreSQL in a Spring Boot application, including best practices and common pitfalls."
+  },
+  {
+    "slug": "nix-os-niri-setup",
+    "title": "Nix OS + Niri Setup",
+    "date": "2026-01-09T00:00:00.000Z",
+    "tags": [
+      "nixos",
+      "linux",
+      "window-manager",
+      "niri",
+      "wayland"
+    ],
+    "excerpt": "A comprehensive guide to setting up NixOS with Niri, a modern Wayland compositor for a tiling window manager experience."
+  },
+  {
+    "slug": "getting-started-spring",
+    "title": "Getting Started with Spring Boot",
+    "date": "2026-01-05T00:00:00.000Z",
+    "tags": [
+      "java",
+      "spring",
+      "spring-boot",
+      "tutorial"
+    ],
+    "excerpt": "Learn how to create your first Spring Boot application and understand the core concepts."
+  }
+]

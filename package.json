@@ -1,0 +1,29 @@
+{
+  "name": "portfolio-website",
+  "version": "1.0.0",
+  "description": "Personal portfolio website for Java developer with blog",
+  "main": "build.js",
+  "scripts": {
+    "build": "npm run build:css && node build.js",
+    "build:css": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css --minify",
+    "dev": "node build.js --watch",
+    "dev:css": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/main.css --watch"
+  },
+  "keywords": [
+    "portfolio",
+    "blog",
+    "java-developer"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "front-matter": "^4.0.2",
+    "highlight.js": "^11.11.1",
+    "marked": "^17.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18"
+  }
+}

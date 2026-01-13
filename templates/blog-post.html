@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{{EXCERPT}}" />
+  <meta name="keywords" content="Oleksandr Borovyk, Java Developer, Spring Boot, Portfolio, Blog" />
+  <title>{{TITLE}} - Oleksandr Borovyk</title>
+
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg" />
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/blog.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+
+<body>
+  <header class="fixed inset-x-0 top-0 z-50 bg-[rgba(13,27,42,0.92)] backdrop-blur-md -webkit-backdrop-blur-md" aria-label="Top navigation">
+    <div class="container flex justify-between items-center h-[75px]">
+      <a href="/" class="text-[40px] font-bold text-text opacity-95 hover:opacity-100 no-underline transition-opacity leading-none flex items-center" aria-label="Home">m</a>
+      <nav class="flex gap-9 items-center max-md:gap-[18px] max-md:flex-wrap max-md:justify-end" aria-label="Primary">
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/#about">About</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/#experience">Experience</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/#projects">Projects</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/blog">Blog</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/#contacts">Contacts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="min-h-screen flex items-center pt-[75px] pb-[90px]">
+      <div class="container">
+        <article class="blog-post">
+          <header class="post-header">
+            <h1>{{TITLE}}</h1>
+            <div class="post-meta">
+              <span class="post-date">{{DATE}}</span>
+              {{TAGS}}
+            </div>
+          </header>
+          <div class="post-content">
+            {{CONTENT}}
+          </div>
+          <footer class="post-footer">
+            <a href="/blog" class="back-link">← Back to Blog</a>
+          </footer>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+/* Blog-specific styles */
+
+/* Blog Controls */
+.blog-controls {
+    margin-bottom: 2rem;
+}
+
+.search-box {
+    position: relative;
+    max-width: 100%;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: rgb(27 38 59);
+    border: 1px solid rgba(224,225,221,0.10);
+    border-radius: 10px;
+    font-size: 1.25rem;
+    color: rgb(224 225 221);
+    transition: all 150ms;
+}
+
+.search-box input::placeholder {
+    color: rgba(224,225,221,0.50);
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: rgba(224,225,221,0.30);
+    box-shadow: 0 0 0 2px rgba(224,225,221,0.08);
+}
+
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.filter-label {
+    font-weight: 500;
+    color: rgb(224 225 221);
+    margin-right: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.tag-filter-btn {
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 1px solid rgba(224,225,221,0.20);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgb(224 225 221);
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.tag-filter-btn:hover {
+    border-color: rgba(224,225,221,0.40);
+    background-color: rgba(224,225,221,0.08);
+}
+
+.tag-filter-btn.active {
+    background-color: rgba(224,225,221,0.15);
+    border-color: rgba(224,225,221,0.30);
+    color: rgb(224 225 221);
+}
+
+/* Blog Posts List */
+.blog-posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.blog-post-card {
+    background-color: rgb(27 38 59);
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0 0 15px rgba(0,0,0,.10);
+    border: 1px solid rgba(224,225,221,0.00);
+    transition: all 150ms;
+    cursor: pointer;
+}
+
+.blog-post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0,0,0,.22);
+    border-color: rgba(224,225,221,0.10);
+}
+
+.post-card-content h2 {
+    margin: 0 0 14px 0;
+}
+
+.post-card-content .post-title {
+    margin: 0;
+}
+
+.post-card-content .post-title a {
+    color: rgb(224 225 221);
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.15;
+    text-decoration: none;
+}
+
+.post-card-content .post-title a:hover {
+    opacity: 0.85;
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    color: rgba(224,225,221,0.78);
+    font-size: 1.25rem;
+}
+
+.post-date {
+    font-weight: 500;
+}
+
+.post-excerpt {
+    margin: 0 0 14px 0;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: rgba(224,225,221,0.78);
+}
+
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    color: rgb(224 225 221);
+    font-size: 1.25rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 150ms;
+}
+
+.read-more:hover {
+    opacity: 0.85;
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: rgba(224,225,221,0.08);
+    border-radius: 5px;
+    font-size: 0.875rem;
+    color: rgba(224,225,221,0.85);
+    font-weight: 500;
+}
+
+/* Blog Post Page */
+.blog-post-container {
+    padding: 120px 0 60px;
+    min-height: calc(100vh - 75px);
+}
+
+.blog-post {
+    background-color: transparent;
+    padding: 0;
+}
+
+.post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(224,225,221,0.35);
+}
+
+.post-header h1 {
+    font-size: 40px;
+    margin: 0 0 1rem 0;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color: rgb(224 225 221);
+}
+
+.post-header .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    color: rgba(224,225,221,0.78);
+    font-size: 1.25rem;
+}
+
+.post-header .post-date {
+    font-weight: 500;
+}
+
+.post-content {
+    line-height: 1.8;
+    color: rgb(224 225 221);
+    font-size: 1.25rem;
+}
+
+.post-content h1 {
+    font-size: 40px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color: rgb(224 225 221);
+}
+
+.post-content h2 {
+    font-size: 30px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: rgb(224 225 221);
+}
+
+.post-content h3 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    color: rgb(224 225 221);
+}
+
+.post-content p {
+    margin-bottom: 1.5rem;
+    color: rgba(224,225,221,0.78);
+    line-height: 1.6;
+}
+
+.post-content ul,
+.post-content ol {
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.post-content li {
+    margin-bottom: 0.5rem;
+    color: rgba(224,225,221,0.78);
+    line-height: 1.6;
+}
+
+.post-content code {
+    background-color: rgba(224,225,221,0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9em;
+    color: rgba(224,225,221,0.90);
+}
+
+.post-content pre {
+    background-color: rgb(27 38 59);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid rgba(224,225,221,0.10);
+}
+
+.post-content pre code {
+    background-color: transparent;
+    padding: 0;
+    color: rgb(224 225 221);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.post-content blockquote {
+    border-left: 4px solid rgba(224,225,221,0.35);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    color: rgba(224,225,221,0.70);
+    font-style: italic;
+}
+
+.post-content a {
+    color: rgb(224 225 221);
+    text-decoration: underline;
+}
+
+.post-content a:hover {
+    opacity: 0.85;
+}
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+.post-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(224,225,221,0.35);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgb(224 225 221);
+    font-weight: 500;
+    font-size: 1.25rem;
+    text-decoration: none;
+    transition: all 150ms;
+}
+
+.back-link:hover {
+    opacity: 0.85;
+    transform: translateX(-5px);
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem 0;
+    color: rgba(224,225,221,0.78);
+}
+
+.no-results p {
+    font-size: 1.25rem;
+}

@@ -1,0 +1,13 @@
+# Cloudflare Pages redirects for clean URLs
+# This file enables clean URLs without .html extensions
+
+# Home page - accessible at / or /home
+/home /index.html 200
+/ /index.html 200
+
+# Blog listing page
+/blog /blog.html 200
+
+# Blog posts - redirect from /blog/:slug to /blog-posts/:slug.html
+# Note: This uses a catch-all pattern that will match /blog/anything
+/blog/* /blog-posts/:splat.html 200
