@@ -44,6 +44,15 @@ const markdownFiles = fs.readdirSync(blogDir)
 // Process each markdown file
 const posts = [];
 
+function escapeHtml(input) {
+  return String(input)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 markdownFiles.forEach(({ filename, path: filePath }) => {
   const content = fs.readFileSync(filePath, 'utf8');
   const { attributes, body } = matter(content);
@@ -67,9 +76,12 @@ markdownFiles.forEach(({ filename, path: filePath }) => {
   posts.push(post);
   
   // Generate HTML page
+  const safeTitle = escapeHtml(post.title);
+  const safeExcerpt = escapeHtml(post.excerpt);
+
   let postHtml = template
-    .replace('{{TITLE}}', post.title)
-    .replace('{{EXCERPT}}', post.excerpt.replace(/"/g, '&quot;'))
+    .replaceAll('{{TITLE}}', safeTitle)
+    .replace('{{EXCERPT}}', safeExcerpt)
     .replace('{{DATE}}', new Date(post.date).toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
@@ -80,7 +92,7 @@ markdownFiles.forEach(({ filename, path: filePath }) => {
   // Add tags if they exist
   if (post.tags.length > 0) {
     const tagsHtml = '<div class="post-tags">' + 
-      post.tags.map(tag => `<span class="tag">${tag}</span>`).join('') + 
+      post.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('') + 
       '</div>';
     postHtml = postHtml.replace('{{TAGS}}', tagsHtml);
   } else {
