@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn how to configure and use Hibernate ORM with PostgreSQL in a Spring Boot application, including best practices and common pitfalls." />
+  <meta name="keywords" content="Oleksandr Borovyk, Java Developer, Spring Boot, Portfolio, Blog" />
+  <title>How to Use Hibernate with PostgreSQL and Spring Boot - Oleksandr Borovyk</title>
+
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg" />
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/blog.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+
+<body>
+  <header class="fixed inset-x-0 top-0 z-50 bg-[rgba(13,27,42,0.92)] backdrop-blur-md -webkit-backdrop-blur-md" aria-label="Top navigation">
+    <div class="container flex justify-between items-center h-[75px]">
+      <a href="../index.html" class="text-[30px] font-bold text-text opacity-95 hover:opacity-100 no-underline transition-opacity" aria-label="Home">m</a>
+      <nav class="flex gap-9 items-center max-md:gap-[18px] max-md:flex-wrap max-md:justify-end" aria-label="Primary">
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="../index.html#about">About</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="../index.html#experience">Experience</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="../index.html#projects">Projects</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="../blog.html">Blog</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="../index.html#contacts">Contacts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="min-h-screen flex items-center pt-[75px] pb-[90px]">
+      <div class="container">
+        <article class="blog-post">
+          <header class="post-header">
+            <h1>How to Use Hibernate with PostgreSQL and Spring Boot</h1>
+            <div class="post-meta">
+              <span class="post-date">December 20, 2024</span>
+              <div class="post-tags"><span class="tag">java</span><span class="tag">spring-boot</span><span class="tag">hibernate</span><span class="tag">postgresql</span><span class="tag">jpa</span><span class="tag">database</span></div>
+            </div>
+          </header>
+          <div class="post-content">
+            <h1>How to Use Hibernate with PostgreSQL and Spring Boot</h1>
+<p>Hibernate is a powerful Object-Relational Mapping (ORM) framework that simplifies database interactions in Java applications. When combined with Spring Boot and PostgreSQL, you get a robust and efficient data persistence layer.</p>
+<h2>Prerequisites</h2>
+<ul>
+<li>Java 17 or higher</li>
+<li>Spring Boot 3.x</li>
+<li>PostgreSQL database</li>
+<li>Maven or Gradle</li>
+</ul>
+<h2>Project Setup</h2>
+<h3>1. Add Dependencies</h3>
+<p>Add the following dependencies to your <code>pom.xml</code>:</p>
+<pre><code class="language-xml">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.postgresql&lt;/groupId&gt;
+        &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
+        &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-validation&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<h3>2. Configure Database Connection</h3>
+<p>Add the following to your <code>application.properties</code>:</p>
+<pre><code class="language-properties"># PostgreSQL Configuration
+spring.datasource.url=jdbc:postgresql://localhost:5432/mydb
+spring.datasource.username=postgres
+spring.datasource.password=yourpassword
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Hibernate Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.jdbc.batch_size=20
+spring.jpa.properties.hibernate.order_inserts=true
+spring.jpa.properties.hibernate.order_updates=true
+</code></pre>
+<p>Or using <code>application.yml</code>:</p>
+<pre><code class="language-yaml">spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: postgres
+    password: yourpassword
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+</code></pre>
+<h2>Creating Entities</h2>
+<h3>Basic Entity Example</h3>
+<pre><code class="language-java">@Entity
+@Table(name = &quot;users&quot;)
+public class User {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false, unique = true)
+    private String email;
+    
+    @Column(nullable = false)
+    private String name;
+    
+    @Column(name = &quot;created_at&quot;)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    
+    @Column(name = &quot;updated_at&quot;)
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+    
+    // Constructors, getters, and setters
+    public User() {}
+    
+    public User(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
+    
+    // Getters and setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+}
+</code></pre>
+<h3>Relationships Example</h3>
+<pre><code class="language-java">@Entity
+@Table(name = &quot;posts&quot;)
+public class Post {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false)
+    private String title;
+    
+    @Column(columnDefinition = &quot;TEXT&quot;)
+    private String content;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = &quot;user_id&quot;, nullable = false)
+    private User author;
+    
+    @OneToMany(mappedBy = &quot;post&quot;, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List&lt;Comment&gt; comments = new ArrayList&lt;&gt;();
+    
+    // Constructors, getters, and setters
+}
+</code></pre>
+<h2>Repository Layer</h2>
+<p>Create a repository interface:</p>
+<pre><code class="language-java">@Repository
+public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+    
+    Optional&lt;User&gt; findByEmail(String email);
+    
+    List&lt;User&gt; findByNameContainingIgnoreCase(String name);
+    
+    @Query(&quot;SELECT u FROM User u WHERE u.createdAt &gt;= :date&quot;)
+    List&lt;User&gt; findUsersCreatedAfter(@Param(&quot;date&quot;) LocalDateTime date);
+    
+    @Modifying
+    @Query(&quot;UPDATE User u SET u.name = :name WHERE u.id = :id&quot;)
+    int updateUserName(@Param(&quot;id&quot;) Long id, @Param(&quot;name&quot;) String name);
+}
+</code></pre>
+<h2>Service Layer</h2>
+<pre><code class="language-java">@Service
+@Transactional
+public class UserService {
+    
+    private final UserRepository userRepository;
+    
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+    
+    public User createUser(User user) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalArgumentException(&quot;User with email already exists&quot;);
+        }
+        return userRepository.save(user);
+    }
+    
+    public Optional&lt;User&gt; getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+    
+    public List&lt;User&gt; getAllUsers() {
+        return userRepository.findAll();
+    }
+    
+    public User updateUser(Long id, User userDetails) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -&gt; new EntityNotFoundException(&quot;User not found&quot;));
+        
+        user.setName(userDetails.getName());
+        user.setEmail(userDetails.getEmail());
+        
+        return userRepository.save(user);
+    }
+    
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+}
+</code></pre>
+<h2>Best Practices</h2>
+<h3>1. Use Lazy Loading</h3>
+<pre><code class="language-java">@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = &quot;user_id&quot;)
+private User author;
+</code></pre>
+<h3>2. Enable Batch Processing</h3>
+<pre><code class="language-properties">spring.jpa.properties.hibernate.jdbc.batch_size=20
+spring.jpa.properties.hibernate.order_inserts=true
+spring.jpa.properties.hibernate.order_updates=true
+</code></pre>
+<h3>3. Use @Transactional Properly</h3>
+<pre><code class="language-java">@Service
+@Transactional(readOnly = true)
+public class UserService {
+    
+    @Transactional
+    public User createUser(User user) {
+        // Write operation
+    }
+    
+    public List&lt;User&gt; getAllUsers() {
+        // Read operation - uses read-only transaction
+    }
+}
+</code></pre>
+<h3>4. Handle N+1 Query Problem</h3>
+<p>Use <code>@EntityGraph</code> or <code>JOIN FETCH</code>:</p>
+<pre><code class="language-java">@Query(&quot;SELECT u FROM User u JOIN FETCH u.posts WHERE u.id = :id&quot;)
+Optional&lt;User&gt; findByIdWithPosts(@Param(&quot;id&quot;) Long id);
+</code></pre>
+<h3>5. Use DTOs for Projections</h3>
+<pre><code class="language-java">public interface UserProjection {
+    String getEmail();
+    String getName();
+}
+
+@Query(&quot;SELECT u.email as email, u.name as name FROM User u&quot;)
+List&lt;UserProjection&gt; findAllProjections();
+</code></pre>
+<h2>Common Issues and Solutions</h2>
+<h3>Issue 1: Connection Pool Exhaustion</h3>
+<p><strong>Solution</strong>: Configure connection pool:</p>
+<pre><code class="language-properties">spring.datasource.hikari.maximum-pool-size=10
+spring.datasource.hikari.minimum-idle=5
+spring.datasource.hikari.connection-timeout=20000
+</code></pre>
+<h3>Issue 2: LazyInitializationException</h3>
+<p><strong>Solution</strong>: Use <code>@Transactional</code> or fetch joins:</p>
+<pre><code class="language-java">@Transactional(readOnly = true)
+public User getUserWithPosts(Long id) {
+    return userRepository.findByIdWithPosts(id)
+        .orElseThrow(() -&gt; new EntityNotFoundException());
+}
+</code></pre>
+<h3>Issue 3: Schema Updates</h3>
+<p><strong>Solution</strong>: Use migrations with Flyway or Liquibase instead of <code>ddl-auto=update</code> in production.</p>
+<h2>Conclusion</h2>
+<p>Hibernate with PostgreSQL and Spring Boot provides a powerful and efficient way to handle database operations. By following best practices like using lazy loading, batch processing, and proper transaction management, you can build scalable and maintainable applications.</p>
+
+          </div>
+          <footer class="post-footer">
+            <a href="../blog.html" class="back-link">← Back to Blog</a>
+          </footer>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

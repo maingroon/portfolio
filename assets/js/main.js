@@ -46,12 +46,12 @@ async function loadRecentPosts() {
             
             return `
                 <article class="bg-panel rounded-[5px] shadow-custom p-4 mb-6">
-                    <h3 class="m-0 mb-2 text-2xl font-bold"><a href="/blog/${post.slug}" class="text-text no-underline hover:underline">${post.title}</a></h3>
+                    <h3 class="m-0 mb-2 text-2xl font-bold"><a href="./blog-posts/${post.slug}.html" class="text-text no-underline hover:underline">${post.title}</a></h3>
                     <div class="mb-2 text-muted text-sm">
                         <span class="post-date">${date}</span>
                     </div>
                     <p class="m-0 mb-3 text-muted leading-[1.6]">${post.excerpt}</p>
-                    <a href="/blog/${post.slug}" class="text-text no-underline hover:underline">Read More →</a>
+                    <a href="./blog-posts/${post.slug}.html" class="text-text no-underline hover:underline">Read More →</a>
                 </article>
             `;
         }).join('');

@@ -1,5 +1,4 @@
 node_modules/
-blog-posts/
 .DS_Store
 *.log
 .env

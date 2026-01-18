@@ -48,14 +48,14 @@ function renderPosts() {
             <article class="blog-post-card">
                 <div class="post-card-content">
                     <h2 class="post-title">
-                        <a href="/blog/${post.slug}">${post.title}</a>
+                        <a href="./blog-posts/${post.slug}.html">${post.title}</a>
                     </h2>
                     <div class="post-meta">
                         <span class="post-date">${date}</span>
                         ${tagsHtml}
                     </div>
                     <p class="post-excerpt">${post.excerpt}</p>
-                    <a href="/blog/${post.slug}" class="read-more">Read More →</a>
+                    <a href="./blog-posts/${post.slug}.html" class="read-more">Read More →</a>
                 </div>
             </article>
         `;

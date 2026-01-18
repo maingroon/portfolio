@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A comprehensive guide to setting up NixOS with Niri, a modern Wayland compositor for a tiling window manager experience." />
+  <meta name="keywords" content="Oleksandr Borovyk, Java Developer, Spring Boot, Portfolio, Blog" />
+  <title>Nix OS + Niri Setup - Oleksandr Borovyk</title>
+
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg" />
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/blog.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+
+<body>
+  <header class="fixed inset-x-0 top-0 z-50 bg-[rgba(13,27,42,0.92)] backdrop-blur-md -webkit-backdrop-blur-md" aria-label="Top navigation">
+    <div class="container flex justify-between items-center h-[75px]">
+      <a href="/" class="text-[40px] font-bold text-text opacity-95 hover:opacity-100 no-underline transition-opacity leading-none flex items-center" aria-label="Home">m</a>
+      <nav class="flex gap-9 items-center max-md:gap-[18px] max-md:flex-wrap max-md:justify-end" aria-label="Primary">
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/#about">About</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/#experience">Experience</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/#projects">Projects</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/blog">Blog</a>
+        <a class="text-xl font-medium text-text opacity-95 hover:opacity-100 no-underline max-md:text-lg" href="/#contacts">Contacts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="min-h-screen flex items-center pt-[75px] pb-[90px]">
+      <div class="container">
+        <article class="blog-post">
+          <header class="post-header">
+            <h1>{{TITLE}}</h1>
+            <div class="post-meta">
+              <span class="post-date">January 9, 2026</span>
+              <div class="post-tags"><span class="tag">nixos</span><span class="tag">linux</span><span class="tag">window-manager</span><span class="tag">niri</span><span class="tag">wayland</span></div>
+            </div>
+          </header>
+          <div class="post-content">
+            <h1>Nix OS + Niri Setup</h1>
+<p>NixOS is a unique Linux distribution built on the Nix package manager, offering declarative system configuration and reproducible builds. Combined with Niri, a modern Wayland compositor, you get a powerful and customizable desktop environment.</p>
+<h2>What is NixOS?</h2>
+<p>NixOS is a Linux distribution that uses a purely functional package management approach. Your entire system configuration is defined in a single configuration file (<code>configuration.nix</code>), making it easy to reproduce, version control, and rollback changes.</p>
+<h2>What is Niri?</h2>
+<p>Niri is a scrollable-tiling Wayland compositor that provides a modern, keyboard-driven window management experience. It&#39;s written in Rust and offers smooth animations and a clean, minimal interface.</p>
+<h2>Installation Steps</h2>
+<h3>1. Install NixOS</h3>
+<p>First, download the NixOS ISO and install it on your system. During installation, you&#39;ll configure your initial <code>configuration.nix</code> file.</p>
+<h3>2. Configure NixOS for Niri</h3>
+<p>Add the following to your <code>configuration.nix</code>:</p>
+<pre><code class="language-nix">{ config, pkgs, ... }:
+
+{
+  # Enable Wayland
+  services.xserver.enable = false;
+  
+  # Enable Niri
+  programs.niri.enable = true;
+  
+  # Required packages
+  environment.systemPackages = with pkgs; [
+    niri
+    waybar
+    rofi-wayland
+    alacritty
+  ];
+  
+  # Enable fonts
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ &quot;FiraCode&quot; &quot;DroidSansMono&quot; ]; })
+  ];
+}
+</code></pre>
+<h3>3. Configure Niri</h3>
+<p>Create a Niri configuration file at <code>~/.config/niri/config.kdl</code>:</p>
+<pre><code class="language-kdl">general {
+  border-width 2
+  border-radius 8
+  gaps 8
+}
+
+animations {
+  enabled true
+  spring 100 0.85
+}
+
+input {
+  keyboard {
+    repeat-delay 200
+    repeat-rate 30
+  }
+}
+
+workspaces {
+  outputs &quot;eDP-1&quot;
+  layout &quot;MainAndVertStack&quot;
+}
+</code></pre>
+<h3>4. Key Bindings</h3>
+<p>Niri comes with sensible defaults, but you can customize key bindings in the config:</p>
+<ul>
+<li><code>Super + Enter</code>: Open terminal</li>
+<li><code>Super + D</code>: Open application launcher</li>
+<li><code>Super + Q</code>: Close window</li>
+<li><code>Super + H/V</code>: Focus left/down</li>
+<li><code>Super + J/K</code>: Focus down/up</li>
+<li><code>Super + Shift + H/V/J/K</code>: Move window</li>
+</ul>
+<h2>Post-Installation</h2>
+<p>After rebooting, you should be able to log into your Niri session. Customize your setup further by:</p>
+<ol>
+<li>Configuring Waybar for a status bar</li>
+<li>Setting up Rofi for application launching</li>
+<li>Customizing your terminal (Alacritty) colors and fonts</li>
+<li>Adding additional NixOS packages as needed</li>
+</ol>
+<h2>Benefits of This Setup</h2>
+<ul>
+<li><strong>Reproducible</strong>: Your entire system is defined in configuration files</li>
+<li><strong>Rollback</strong>: Easy to revert to previous system states</li>
+<li><strong>Modern</strong>: Wayland provides better security and performance</li>
+<li><strong>Efficient</strong>: Tiling window manager maximizes screen space</li>
+<li><strong>Customizable</strong>: Everything can be configured to your preferences</li>
+</ul>
+<h2>Conclusion</h2>
+<p>NixOS with Niri provides a powerful, modern, and highly customizable Linux desktop experience. The declarative nature of NixOS combined with Niri&#39;s efficient window management creates an excellent development environment.</p>
+
+          </div>
+          <footer class="post-footer">
+            <a href="/blog" class="back-link">← Back to Blog</a>
+          </footer>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

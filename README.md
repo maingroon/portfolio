@@ -35,4 +35,37 @@ excerpt: A brief description of post
 
 ## Deployment
 
-Simply upload the contents of the project directory (excluding `node_modules` and `blog/` source files if you prefer).
+### GitHub Pages
+
+This project is configured for GitHub Pages deployment. Follow these steps:
+
+1. **Push your code to GitHub**:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+   git push -u origin main
+   ```
+
+2. **Enable GitHub Pages**:
+   - Go to your repository on GitHub
+   - Navigate to **Settings** → **Pages**
+   - Under **Source**, select **Deploy from a branch**
+   - Choose **main** branch and **/ (root)** folder
+   - Click **Save**
+
+3. **Build and deploy**:
+   ```bash
+   npm run build
+   git add .
+   git commit -m "Build for GitHub Pages"
+   git push
+   ```
+
+4. **Your site will be available at**:
+   - `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/` (for project repos)
+   - `https://YOUR_USERNAME.github.io/` (if repo is named `YOUR_USERNAME.github.io`)
+
+**Note**: Make sure to run `npm run build` before each deployment to generate the latest blog posts and CSS files.
